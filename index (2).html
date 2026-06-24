@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procontrol - Tarjeta Digital</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-transition:active {
+            transform: scale(0.95);
+        }
+
+        /* Colores personalizados */
+        .bg-whatsapp { background-color: #25D366; }
+        .bg-facebook { background-color: #1877F2; }
+        .bg-instagram { background-color: #E4405F; }
+        .bg-youtube { background-color: #FF0000; }
+        .bg-pro-blue { background-color: #0056b3; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* Animación de parpadeo y movimiento para la flecha */
+        @keyframes blink {
+            0%, 100% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(8px); }
+        }
+        .animate-blink {
+            animation: blink 1.5s infinite ease-in-out;
+        }
+
+        .scroll-indicator {
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen p-4">
+
+    <!-- Indicador de Scroll (Flecha Parpadeante mejorada) -->
+    <div id="scroll-arrow" class="fixed bottom-8 right-8 z-50 scroll-indicator">
+        <div class="animate-blink bg-pro-blue text-white p-3 rounded-full shadow-2xl border-2 border-white/50">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </div>
+    </div>
+
+    <div class="w-full max-w-md animate-fade-in py-8">
+        <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden p-8 relative">
+
+            <!-- Botón Compartir -->
+            <button onclick="shareCard()" aria-label="Compartir tarjeta"
+                    class="absolute top-4 right-4 z-10 bg-pro-blue text-white p-2.5 rounded-full shadow-lg hover:brightness-110 btn-transition">
+                <i data-lucide="share-2" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Logo -->
+            <div class="flex flex-col items-center mb-8">
+                <div class="w-full p-4 bg-white rounded-2xl shadow-sm mb-4">
+                    <img src="https://procontrolmexico.com/wp-content/uploads/2021/05/logo_procontrol_grande.png" 
+                         alt="Procontrol Logo" 
+                         class="w-full h-auto object-contain mx-auto"
+                         onerror="this.src='https://via.placeholder.com/200x80?text=Procontrol'">
+                </div>
+            </div>
+
+            <!-- Listado de Botones -->
+            <div class="space-y-4">
+
+                <!-- Dossier Corporativo -->
+                <div>
+                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Conócenos</h2>
+                    <a href="https://procontrolmexico.github.io/Dossier-ProControl/" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition border border-amber-400/30">
+                        <i data-lucide="file-text" class="mr-4 text-amber-400"></i>
+                        <div class="flex flex-col">
+                            <span class="text-sm font-bold">Dossier Corporativo</span>
+                            <span class="text-[10px] opacity-80">Conoce todos nuestros servicios</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Sitio Web -->
+                <div>
+                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Nuestra Web</h2>
+                    <a href="https://www.procontrolmexico.com" target="_blank" 
+                       class="flex items-center p-4 bg-pro-blue text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                        <i data-lucide="globe" class="mr-4"></i>
+                        <div class="flex flex-col">
+                            <span class="text-sm font-bold">Sitio Web Oficial</span>
+                            <span class="text-[10px] opacity-80">www.procontrolmexico.com</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Sección WhatsApp -->
+                <div>
+                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Atención Inmediata</h2>
+                    <div class="space-y-2">
+                        <!-- CDMX Actualizado -->
+                        <a href="https://wa.me/525540014294?text=Hola%2C%20necesito%20una%20cotizaci%C3%B3n" 
+                           class="flex items-center p-4 bg-whatsapp text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                            <i data-lucide="message-circle" class="mr-4"></i>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-bold">CDMX e Interior</span>
+                                <span class="text-[10px] opacity-80">55 4001 4294</span>
+                            </div>
+                        </a>
+                        <a href="https://wa.me/529992841288?text=Hola%2C%20necesito%20una%20cotizaci%C3%B3n" 
+                           class="flex items-center p-4 bg-whatsapp text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                            <i data-lucide="message-circle" class="mr-4"></i>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-bold">Península de Yucatán</span>
+                                <span class="text-[10px] opacity-80">99 9284 1288</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sección Ubicaciones -->
+                <div>
+                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Nuestras Oficinas</h2>
+                    <div class="space-y-2">
+                        <a href="https://www.google.com/maps/search/HP4V%2B7R+Cdad.+L%C3%B3pez+Mateos,+Estado+de+M%C3%A9xico" 
+                           target="_blank" 
+                           class="flex items-center p-4 bg-blue-600 text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                            <i data-lucide="map-pin" class="mr-4"></i>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-bold">Matriz Edo. de México</span>
+                                <span class="text-[10px] opacity-80">Ver en Google Maps</span>
+                            </div>
+                        </a>
+                        <a href="https://maps.app.goo.gl/78hWenschpWatF3a6" 
+                           target="_blank" 
+                           class="flex items-center p-4 bg-amber-500 text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                            <i data-lucide="map" class="mr-4"></i>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-bold">Sucursal Mérida</span>
+                                <span class="text-[10px] opacity-80">Ver en Google Maps</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Redes Sociales -->
+                <div>
+                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Síguenos</h2>
+                    <div class="space-y-2">
+                        <a href="https://www.facebook.com/procontrolmex/?locale=es_LA" target="_blank" 
+                           class="flex items-center p-4 bg-facebook text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                            <i data-lucide="facebook" class="mr-4"></i>
+                            <span class="text-sm font-bold">Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com/procontrol_mexico/" target="_blank" 
+                           class="flex items-center p-4 bg-instagram text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                            <i data-lucide="instagram" class="mr-4"></i>
+                            <span class="text-sm font-bold">Instagram</span>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=JoUvrDk5TIs" target="_blank" 
+                           class="flex items-center p-4 bg-youtube text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
+                            <i data-lucide="youtube" class="mr-4"></i>
+                            <span class="text-sm font-bold">YouTube</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificaciones -->
+            <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50/50 rounded-3xl p-4">
+                <p class="text-[10px] uppercase tracking-widest text-center text-gray-400 font-bold mb-4">Certificaciones</p>
+                <div class="grid grid-cols-3 gap-3">
+                    <a href="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/45001%202018.png" target="_blank" class="h-12 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
+                        <img src="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/45001%202018.png" alt="ISO 45001" class="max-h-full object-contain">
+                    </a>
+                    <a href="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/14001%202015.png" target="_blank" class="h-12 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
+                        <img src="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/14001%202015.png" alt="ISO 14001" class="max-h-full object-contain">
+                    </a>
+                    <a href="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/9001%202015.png" target="_blank" class="h-12 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
+                        <img src="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/9001%202015.png" alt="ISO 9001" class="max-h-full object-contain">
+                    </a>
+                </div>
+                <div class="flex justify-center mt-3">
+                    <a href="https://procontrolmexico.com/wp-content/uploads/2021/07/Logo_COFEPRIS-1.jpg" target="_blank" class="h-12 w-1/3 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
+                        <img src="https://procontrolmexico.com/wp-content/uploads/2021/07/Logo_COFEPRIS-1.jpg" alt="COFEPRIS" class="max-h-full object-contain">
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-[10px] text-gray-400 mt-8">© 2026 Procontrol México</p>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        // Compartir la tarjeta (Web Share API con respaldo de copiar enlace)
+        function shareCard() {
+            const shareData = {
+                title: 'Procontrol México',
+                text: 'Contáctanos y conoce nuestros servicios',
+                url: window.location.href
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(shareData.url).then(() => {
+                    alert('Enlace copiado al portapapeles');
+                });
+            }
+        }
+
+        // Ocultar la flecha cuando el usuario haga scroll hacia abajo
+        window.addEventListener('scroll', function() {
+            const arrow = document.getElementById('scroll-arrow');
+            // Si el scroll baja más de 100px, ocultamos la flecha
+            if (window.scrollY > 100) {
+                arrow.style.opacity = '0';
+            } else {
+                arrow.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+</html>
