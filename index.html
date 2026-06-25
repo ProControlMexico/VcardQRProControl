@@ -3,248 +3,696 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Procontrol - Tarjeta Digital</title>
-    <!-- Tailwind CSS -->
+    <title>Procontrol México - Tarjeta Digital</title>
+
+    <!-- Open Graph / WhatsApp -->
+    <meta property="og:title"        content="ProControl México">
+    <meta property="og:description"  content="Profesionales en control integral de plagas. Certificados ISO 9001 · 14001 · 45001 · COFEPRIS.">
+    <meta property="og:image"        content="https://procontrolmexico.github.io/VcardQRProControl/ChatGPT%20Image%2025%20jun%202026%2C%2013_04_37.png">
+    <meta property="og:url"          content="https://procontrolmexico.github.io/VcardQRProControl/">
+    <meta property="og:type"         content="website">
+    <meta property="og:locale"       content="es_MX">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="ProControl México">
+    <meta name="twitter:description" content="Profesionales en control integral de plagas. Certificados ISO 9001 · 14001 · 45001 · COFEPRIS.">
+    <meta name="twitter:image"       content="https://procontrolmexico.github.io/VcardQRProControl/ChatGPT%20Image%2025%20jun%202026%2C%2013_04_37.png">
+
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary:      #0B5DBB;
+            --primary-dark: #083B7A;
+            --secondary:    #22C55E;
+            --accent:       #F59E0B;
+            --bg:           #F4F7FA;
+            --card:         #FFFFFF;
+            --text:         #172033;
+            --muted:        #7A8797;
+            --border:       #E5EAF0;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem 3rem;
+            color: var(--text);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        /* ── Contenedor ── */
+        .vcard {
+            width: 100%;
+            max-width: 390px;
+            animation: fadeInUp .65s ease-out both;
         }
 
-        .btn-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ── Header ── */
+        .v-header {
+            background: url('ChatGPT Image 25 jun 2026, 13_04_37.png') center center / cover no-repeat;
+            border-radius: 20px 20px 0 0;
+            min-height: 180px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-transition:active {
-            transform: scale(0.95);
+        /* Contenido encima de las hojas */
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
-        /* Colores personalizados */
-        .bg-whatsapp { background-color: #25D366; }
-        .bg-facebook { background-color: #1877F2; }
-        .bg-instagram { background-color: #E4405F; }
-        .bg-youtube { background-color: #FF0000; }
-        .bg-pro-blue { background-color: #0056b3; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-
-        /* Animación de parpadeo y movimiento para la flecha */
-        @keyframes blink {
-            0%, 100% { opacity: 0.4; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(8px); }
-        }
-        .animate-blink {
-            animation: blink 1.5s infinite ease-in-out;
-        }
-
-        .scroll-indicator {
+        /* Contenedor de hojas */
+        .leaf-cluster {
+            position: absolute;
+            z-index: 1;
             pointer-events: none;
-            transition: opacity 0.4s ease;
-            opacity: 1;
+        }
+
+        /* Hoja base */
+        .leaf {
+            position: absolute;
+            display: block;
+            background: linear-gradient(135deg, rgba(28,154,76,.75), rgba(6,82,45,.45));
+            border-radius: 100% 0 100% 0;
+            box-shadow: inset -12px -10px 20px rgba(0,0,0,.25);
+            opacity: 0.75;
+        }
+
+        .leaf::before {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 75%;
+            background: rgba(4,54,32,.6);
+            top: 12%;
+            left: 50%;
+            transform: rotate(28deg);
+            border-radius: 50px;
+        }
+
+        .leaf::after {
+            content: "";
+            position: absolute;
+            width: 55%;
+            height: 55%;
+            top: 25%;
+            left: 28%;
+            border-top: 2px solid rgba(4,54,32,.35);
+            border-bottom: 2px solid rgba(4,54,32,.25);
+            transform: rotate(20deg);
+            opacity: 0.7;
+        }
+
+        /* Lado izquierdo */
+        .leaf-cluster-left {
+            top: -20px;
+            left: -45px;
+            width: 160px;
+            height: 180px;
+        }
+        .leaf-cluster-left .leaf-big {
+            width: 115px;
+            height: 165px;
+            transform: rotate(-28deg);
+        }
+        .leaf-cluster-left .leaf-small {
+            width: 85px;
+            height: 120px;
+            top: 75px;
+            left: -10px;
+            transform: rotate(-55deg);
+            opacity: 0.45;
+        }
+
+        /* Lado derecho */
+        .leaf-cluster-right {
+            top: -18px;
+            right: -45px;
+            width: 160px;
+            height: 180px;
+        }
+        .leaf-cluster-right .leaf-big {
+            width: 115px;
+            height: 165px;
+            right: 0;
+            transform: rotate(42deg) scaleX(-1);
+        }
+        .leaf-cluster-right .leaf-small {
+            width: 85px;
+            height: 120px;
+            top: 78px;
+            right: -5px;
+            transform: rotate(65deg) scaleX(-1);
+            opacity: 0.45;
+        }
+
+        .share-btn {
+            position: absolute;
+            top: 14px; right: 14px;
+            z-index: 1;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 10px;
+            padding: 8px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+        .share-btn:hover { background: rgba(255,255,255,.25); }
+
+        .logo-box {
+            position: relative; z-index: 1;
+            margin: 0 auto 1.1rem;
+            display: flex;
+            justify-content: center;
+        }
+        .logo-box img { width: 80%; height: 72px; object-fit: contain; }
+
+        .company-name {
+            position: relative; z-index: 1;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .company-tagline {
+            position: relative; z-index: 1;
+            color: rgba(255,255,255,.65);
+            font-size: 11.5px;
+            line-height: 1.55;
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-group {
+            position: relative; z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .btn-cta-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--secondary);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 14px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 18px rgba(34,197,94,.35);
+            transition: filter .2s, transform .15s;
+        }
+        .btn-cta-primary:hover  { filter: brightness(1.08); }
+        .btn-cta-primary:active { transform: scale(.97); }
+
+        .btn-cta-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 11px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: background .2s;
+        }
+        .btn-cta-secondary:hover { background: rgba(255,255,255,.22); }
+
+        /* ── Body ── */
+        .v-body {
+            background: var(--card);
+            border-radius: 0 0 20px 20px;
+            padding: 1.4rem 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            box-shadow: 0 8px 32px rgba(15,23,42,.08);
+        }
+
+        /* ── Section title ── */
+        .sec-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: 20px 0 8px 2px;
+        }
+        .sec-title:first-child { margin-top: 4px; }
+
+        /* ── Botón tarjeta blanca ── */
+        .btn-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: 0 2px 8px rgba(15,23,42,.05);
+            transition: box-shadow .2s, transform .15s;
+            margin-bottom: 8px;
+        }
+        .btn-card:last-of-type { margin-bottom: 0; }
+        .btn-card:hover  { box-shadow: 0 8px 24px rgba(15,23,42,.10); transform: translateY(-1px); }
+        .btn-card:active { transform: scale(.98); }
+
+        /* ── Botón sólido verde (WhatsApp) ── */
+        .btn-wa {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--secondary);
+            border-radius: 14px;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 4px 16px rgba(34,197,94,.25);
+            transition: filter .2s, transform .15s;
+            margin-bottom: 8px;
+        }
+        .btn-wa:hover  { filter: brightness(1.07); }
+        .btn-wa:active { transform: scale(.98); }
+        .btn-wa .btn-label strong { color: white; }
+        .btn-wa .btn-label span   { color: rgba(255,255,255,.72); }
+        .btn-wa .btn-chevron      { color: rgba(255,255,255,.45); }
+
+        /* ── Icon wrap ── */
+        .icon-wrap {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .icon-blue   { background: rgba(11,93,187,.1);  color: var(--primary); }
+        .icon-green  { background: rgba(255,255,255,.2); color: white; }
+        .icon-orange { background: rgba(245,158,11,.12); color: var(--accent); }
+        .icon-fb     { background: rgba(24,119,242,.1);  color: #1877F2; }
+        .icon-ig     { background: rgba(228,64,95,.1);   color: #E4405F; }
+        .icon-yt     { background: rgba(255,0,0,.1);     color: #FF0000; }
+
+        /* ── Label dentro del botón ── */
+        .btn-label { flex: 1; }
+        .btn-label strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .btn-label span   { font-size: 11px; color: var(--muted); }
+        .btn-chevron      { color: var(--border); flex-shrink: 0; }
+
+        /* ── Certificaciones ── */
+        .cert-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 0;
+        }
+        .cert-intro {
+            font-size: 11px;
+            color: var(--muted);
+            text-align: center;
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+        .cert-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 4px;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .cert-scroll:active { cursor: grabbing; }
+        .cert-scroll::-webkit-scrollbar { display: none; }
+        .cert-badge {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px;
+            height: 56px;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .cert-badge:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(15,23,42,.1); }
+        .cert-badge img   { max-height: 100%; max-width: 100%; object-fit: contain; }
+        .cert-footnote {
+            font-size: 10px;
+            color: var(--muted);
+            text-align: center;
+            line-height: 1.5;
+            padding-top: 10px;
+            margin-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── Acceso rápido grid ── */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .quick-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 8px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(15,23,42,.05);
+            transition: box-shadow .2s, transform .15s;
+        }
+        .quick-btn:hover  { box-shadow: 0 8px 24px rgba(15,23,42,.1); transform: translateY(-1px); }
+        .quick-btn:active { transform: scale(.96); }
+        .quick-btn span   { font-size: 10.5px; font-weight: 600; color: var(--text); text-align: center; line-height: 1.35; }
+
+        /* ── Oficinas grid ── */
+        .office-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .office-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(15,23,42,.05);
+            transition: box-shadow .2s, transform .15s;
+        }
+        .office-card:hover  { box-shadow: 0 8px 24px rgba(15,23,42,.1); transform: translateY(-1px); }
+        .office-card:active { transform: scale(.97); }
+        .office-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .office-info strong { display: block; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .office-info span   { display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+        .office-link        { font-size: 11px; font-weight: 600; margin: 0; }
+
+        /* ── WhatsApp grid ── */
+        .wa-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .wa-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: #1aab5c;
+            border-radius: 14px;
+            padding: 14px 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(34,197,94,.25);
+            transition: filter .2s, transform .15s;
+        }
+        .wa-card:hover  { filter: brightness(1.07); }
+        .wa-card:active { transform: scale(.97); }
+        .wa-card-text strong { display: block; font-size: 12px; font-weight: 700; color: white; margin-bottom: 2px; }
+        .wa-card-text span   { font-size: 10px; color: rgba(255,255,255,.75); }
+
+        /* ── Redes sociales ── */
+        .social-footer {
+            background: linear-gradient(160deg, #03182F 0%, #051F3B 60%, #062845 100%);
+            border-radius: 0 0 20px 20px;
+            padding: 20px 14px 22px;
+            margin: 0 -1.25rem -1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .btn-social {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform .2s, filter .2s;
+        }
+        .btn-social:hover  { transform: scale(1.1); filter: brightness(1.12); }
+        .btn-social:active { transform: scale(.93); }
+        .social-tagline {
+            font-size: 10.5px;
+            color: rgba(255,255,255,.5);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── Footer ── */
+        .v-footer {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 10.5px;
+            color: var(--muted);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="flex flex-col items-center min-h-screen p-4">
+<body>
 
-    <!-- Indicador de Scroll (Flecha Parpadeante mejorada) -->
-    <div id="scroll-arrow" class="fixed bottom-8 right-8 z-50 scroll-indicator">
-        <div class="animate-blink bg-pro-blue text-white p-3 rounded-full shadow-2xl border-2 border-white/50">
-            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+<div class="vcard">
+
+    <!-- ── Header ── -->
+    <div class="v-header" style="position:relative;overflow:hidden;">
+
+        <div class="hero-content">
+        </div><!-- /hero-content -->
+
+    </div><!-- /v-header -->
+
+    <!-- ── Body ── -->
+    <div class="v-body">
+
+        <!-- Acceso rápido -->
+        <p class="sec-title">Acceso rápido</p>
+
+        <div class="quick-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <a href="https://procontrolmexico.github.io/Dossier-ProControl/" target="_blank" rel="noopener noreferrer" class="quick-btn">
+                <img src="Escudo Procontrol.png" alt="Dossier" style="width:40px;height:40px;object-fit:contain;border-radius:50%;background:white;padding:2px;">
+                <span>Dossier Corporativo</span>
+            </a>
+            <a href="https://www.procontrolmexico.com" target="_blank" class="quick-btn">
+                <img src="https://www.google.com/s2/favicons?domain=procontrolmexico.com&sz=64" alt="Sitio Web" style="width:40px;height:40px;object-fit:contain;">
+                <span>Sitio Oficial</span>
+            </a>
         </div>
-    </div>
 
-    <div class="w-full max-w-md animate-fade-in py-8">
-        <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden p-8 relative">
+        <!-- Atención inmediata -->
+        <p class="sec-title">Atención inmediata</p>
 
-            <!-- Botón Compartir -->
-            <button onclick="shareCard()" aria-label="Compartir tarjeta"
-                    class="absolute top-4 right-4 z-10 bg-pro-blue text-white p-2.5 rounded-full shadow-lg hover:brightness-110 btn-transition">
-                <i data-lucide="share-2" class="w-4 h-4"></i>
-            </button>
-
-            <!-- Logo -->
-            <div class="flex flex-col items-center mb-8">
-                <div class="w-full p-4 bg-white rounded-2xl shadow-sm mb-4">
-                    <img src="https://procontrolmexico.com/wp-content/uploads/2021/05/logo_procontrol_grande.png" 
-                         alt="Procontrol Logo" 
-                         class="w-full h-auto object-contain mx-auto"
-                         onerror="this.src='https://via.placeholder.com/200x80?text=Procontrol'">
+        <div class="wa-grid">
+            <a href="https://wa.me/525540014294?text=Hola%2C%20necesito%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="wa-card">
+                <div class="wa-card-text">
+                    <strong>CDMX e Interior</strong>
+                    <span>55 4001 4294</span>
                 </div>
-            </div>
-
-            <!-- Listado de Botones -->
-            <div class="space-y-4">
-
-                <!-- Dossier Corporativo -->
-                <div>
-                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Conócenos</h2>
-                    <a href="https://procontrolmexico.github.io/Dossier-ProControl/" target="_blank" rel="noopener noreferrer"
-                       class="flex items-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition border border-amber-400/30">
-                        <i data-lucide="file-text" class="mr-4 text-amber-400"></i>
-                        <div class="flex flex-col">
-                            <span class="text-sm font-bold">Dossier Corporativo</span>
-                            <span class="text-[10px] opacity-80">Conoce todos nuestros servicios</span>
-                        </div>
-                    </a>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" style="width:26px;height:26px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a href="https://wa.me/529992841288?text=Hola%2C%20necesito%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="wa-card">
+                <div class="wa-card-text">
+                    <strong>Península de Yucatán</strong>
+                    <span>99 9284 1288</span>
                 </div>
-
-                <!-- Sitio Web -->
-                <div>
-                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Nuestra Web</h2>
-                    <a href="https://www.procontrolmexico.com" target="_blank" 
-                       class="flex items-center p-4 bg-pro-blue text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                        <i data-lucide="globe" class="mr-4"></i>
-                        <div class="flex flex-col">
-                            <span class="text-sm font-bold">Sitio Web Oficial</span>
-                            <span class="text-[10px] opacity-80">www.procontrolmexico.com</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Sección WhatsApp -->
-                <div>
-                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Atención Inmediata</h2>
-                    <div class="space-y-2">
-                        <!-- CDMX Actualizado -->
-                        <a href="https://wa.me/525540014294?text=Hola%2C%20necesito%20una%20cotizaci%C3%B3n" 
-                           class="flex items-center p-4 bg-whatsapp text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                            <i data-lucide="message-circle" class="mr-4"></i>
-                            <div class="flex flex-col">
-                                <span class="text-sm font-bold">CDMX e Interior</span>
-                                <span class="text-[10px] opacity-80">55 4001 4294</span>
-                            </div>
-                        </a>
-                        <a href="https://wa.me/529992841288?text=Hola%2C%20necesito%20una%20cotizaci%C3%B3n" 
-                           class="flex items-center p-4 bg-whatsapp text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                            <i data-lucide="message-circle" class="mr-4"></i>
-                            <div class="flex flex-col">
-                                <span class="text-sm font-bold">Península de Yucatán</span>
-                                <span class="text-[10px] opacity-80">99 9284 1288</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Sección Ubicaciones -->
-                <div>
-                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Nuestras Oficinas</h2>
-                    <div class="space-y-2">
-                        <a href="https://www.google.com/maps/search/HP4V%2B7R+Cdad.+L%C3%B3pez+Mateos,+Estado+de+M%C3%A9xico" 
-                           target="_blank" 
-                           class="flex items-center p-4 bg-blue-600 text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                            <i data-lucide="map-pin" class="mr-4"></i>
-                            <div class="flex flex-col">
-                                <span class="text-sm font-bold">Matriz Edo. de México</span>
-                                <span class="text-[10px] opacity-80">Ver en Google Maps</span>
-                            </div>
-                        </a>
-                        <a href="https://maps.app.goo.gl/78hWenschpWatF3a6" 
-                           target="_blank" 
-                           class="flex items-center p-4 bg-amber-500 text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                            <i data-lucide="map" class="mr-4"></i>
-                            <div class="flex flex-col">
-                                <span class="text-sm font-bold">Sucursal Mérida</span>
-                                <span class="text-[10px] opacity-80">Ver en Google Maps</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Redes Sociales -->
-                <div>
-                    <h2 class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2 ml-2">Síguenos</h2>
-                    <div class="space-y-2">
-                        <a href="https://www.facebook.com/procontrolmex/?locale=es_LA" target="_blank" 
-                           class="flex items-center p-4 bg-facebook text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                            <i data-lucide="facebook" class="mr-4"></i>
-                            <span class="text-sm font-bold">Facebook</span>
-                        </a>
-                        <a href="https://www.instagram.com/procontrol_mexico/" target="_blank" 
-                           class="flex items-center p-4 bg-instagram text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                            <i data-lucide="instagram" class="mr-4"></i>
-                            <span class="text-sm font-bold">Instagram</span>
-                        </a>
-                        <a href="https://www.youtube.com/watch?v=JoUvrDk5TIs" target="_blank" 
-                           class="flex items-center p-4 bg-youtube text-white rounded-2xl shadow-lg hover:brightness-110 btn-transition">
-                            <i data-lucide="youtube" class="mr-4"></i>
-                            <span class="text-sm font-bold">YouTube</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Certificaciones -->
-            <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50/50 rounded-3xl p-4">
-                <p class="text-[10px] uppercase tracking-widest text-center text-gray-400 font-bold mb-4">Certificaciones</p>
-                <div class="grid grid-cols-3 gap-3">
-                    <a href="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/45001%202018.png" target="_blank" class="h-12 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
-                        <img src="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/45001%202018.png" alt="ISO 45001" class="max-h-full object-contain">
-                    </a>
-                    <a href="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/14001%202015.png" target="_blank" class="h-12 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
-                        <img src="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/14001%202015.png" alt="ISO 14001" class="max-h-full object-contain">
-                    </a>
-                    <a href="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/9001%202015.png" target="_blank" class="h-12 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
-                        <img src="https://raw.githubusercontent.com/gavainc/Procontrol-Mexico/main/9001%202015.png" alt="ISO 9001" class="max-h-full object-contain">
-                    </a>
-                </div>
-                <div class="flex justify-center mt-3">
-                    <a href="https://procontrolmexico.com/wp-content/uploads/2021/07/Logo_COFEPRIS-1.jpg" target="_blank" class="h-12 w-1/3 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shadow-sm hover:scale-105 btn-transition">
-                        <img src="https://procontrolmexico.com/wp-content/uploads/2021/07/Logo_COFEPRIS-1.jpg" alt="COFEPRIS" class="max-h-full object-contain">
-                    </a>
-                </div>
-            </div>
-
-            <p class="text-center text-[10px] text-gray-400 mt-8">© 2026 Procontrol México</p>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" style="width:26px;height:26px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
         </div>
-    </div>
 
-    <script>
-        // Inicializar iconos
-        lucide.createIcons();
+        <!-- Oficinas -->
+        <p class="sec-title">Nuestras oficinas</p>
 
-        // Compartir la tarjeta (Web Share API con respaldo de copiar enlace)
-        function shareCard() {
-            const shareData = {
-                title: 'Procontrol México',
-                text: 'Contáctanos y conoce nuestros servicios',
-                url: window.location.href
-            };
-            if (navigator.share) {
-                navigator.share(shareData).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(shareData.url).then(() => {
-                    alert('Enlace copiado al portapapeles');
-                });
-            }
+        <div class="office-grid">
+            <a href="https://www.google.com/maps/search/HP4V%2B7R+Cdad.+L%C3%B3pez+Mateos,+Estado+de+M%C3%A9xico" target="_blank" rel="noopener noreferrer" class="office-card">
+                <div class="office-icon" style="background:rgba(11,93,187,.1);">
+                    <i data-lucide="map-pin" style="width:20px;height:20px;color:var(--primary);"></i>
+                </div>
+                <div class="office-info">
+                    <strong>Matriz</strong>
+                    <span>Estado de México</span>
+                    <p class="office-link" style="color:var(--primary);">Ver ubicación &rsaquo;</p>
+                </div>
+            </a>
+            <a href="https://maps.app.goo.gl/78hWenschpWatF3a6" target="_blank" rel="noopener noreferrer" class="office-card">
+                <div class="office-icon" style="background:rgba(245,158,11,.1);">
+                    <i data-lucide="map-pin" style="width:20px;height:20px;color:var(--accent);"></i>
+                </div>
+                <div class="office-info">
+                    <strong>Sucursal</strong>
+                    <span>Mérida, Yucatán</span>
+                    <p class="office-link" style="color:var(--accent);">Ver ubicación &rsaquo;</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Certificaciones -->
+        <p class="sec-title">Certificaciones</p>
+
+        <div class="cert-card">
+            <div class="cert-scroll">
+                <a href="PROCONTROL ISO 45001 (2) (1).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                    <img src="45001 2018.png" alt="ISO 45001">
+                </a>
+                <a href="PROCONTROL ISO 14001 (2) (1).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                    <img src="14001 2015.png" alt="ISO 14001">
+                </a>
+                <a href="PROCONTROL ISO 9001 (2).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                    <img src="9001 2015.png" alt="ISO 9001">
+                </a>
+                <a href="NORMEX.pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                    <img src="NORMEX F-610.png" alt="NORMEX F-610">
+                </a>
+                <a href="Logo_Cofepris_1200.png" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                    <img src="Logo_Cofepris_1200.png" alt="COFEPRIS">
+                </a>
+                <a href="NPMA-logo-1024x315.webp" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                    <img src="NPMA-logo-1024x315.webp" alt="NPMA">
+                </a>
+                <a href="ANPUAC LOGO.png" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                    <img src="ANPUAC LOGO.png" alt="ANPUAC">
+                </a>
+            </div>
+        </div>
+
+        <!-- Redes sociales -->
+        <p class="sec-title">Síguenos</p>
+
+        <div class="social-footer">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/procontrolmex/?locale=es_LA" target="_blank" rel="noopener noreferrer" class="btn-social" style="background:#1877F2;">
+                    <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/procontrol_mexico/" target="_blank" rel="noopener noreferrer" class="btn-social" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);">
+                    <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=JoUvrDk5TIs" target="_blank" rel="noopener noreferrer" class="btn-social" style="background:#FF0000;">
+                    <svg viewBox="0 0 24 24" fill="white" style="width:22px;height:22px;"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+                </a>
+            </div>
+            <p class="social-tagline">
+                <i data-lucide="shield-check" style="width:13px;height:13px;color:rgba(255,255,255,.4);"></i>
+                Protegemos entornos empresariales desde hace más de 20 años.
+            </p>
+        </div>
+
+    </div><!-- /v-body -->
+
+    <p class="v-footer">© 2026 ProControl México · Todos los derechos reservados</p>
+
+</div><!-- /vcard -->
+
+<script>
+    lucide.createIcons();
+
+    // Drag-to-scroll con inercia fluida
+    const slider = document.querySelector('.cert-scroll');
+    let isDown = false, startX, scrollLeft;
+    let velX = 0, lastX = 0, lastT = 0, rafId;
+
+    slider.querySelectorAll('img, a').forEach(el => {
+        el.setAttribute('draggable', 'false');
+        el.addEventListener('dragstart', e => e.preventDefault());
+    });
+
+    function glide() {
+        velX *= 0.96;
+        slider.scrollLeft += velX;
+        if (Math.abs(velX) > 0.3) rafId = requestAnimationFrame(glide);
+    }
+
+    slider.addEventListener('mousedown', e => {
+        cancelAnimationFrame(rafId);
+        isDown = true;
+        velX = 0;
+        slider.style.cursor = 'grabbing';
+        startX    = e.clientX;
+        scrollLeft = slider.scrollLeft;
+        lastX = e.clientX;
+        lastT = performance.now();
+        e.preventDefault();
+    });
+
+    slider.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        const now = performance.now();
+        const dt  = now - lastT || 1;
+        velX = (lastX - e.clientX) / dt * 14;
+        slider.scrollLeft = scrollLeft - (e.clientX - startX);
+        lastX = e.clientX;
+        lastT = now;
+    });
+
+    ['mouseup', 'mouseleave'].forEach(ev =>
+        slider.addEventListener(ev, () => {
+            if (!isDown) return;
+            isDown = false;
+            slider.style.cursor = 'grab';
+            rafId = requestAnimationFrame(glide);
+        })
+    );
+
+    function shareCard() {
+        const data = {
+            title: 'ProControl México',
+            text: 'Profesionales en control integral de plagas. Certificados ISO 9001 · 14001 · 45001 · COFEPRIS.',
+            url: window.location.href
+        };
+        if (navigator.share) {
+            navigator.share(data).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(data.url).then(() => {
+                alert('Enlace copiado al portapapeles');
+            });
         }
-
-        // Ocultar la flecha cuando el usuario haga scroll hacia abajo
-        window.addEventListener('scroll', function() {
-            const arrow = document.getElementById('scroll-arrow');
-            // Si el scroll baja más de 100px, ocultamos la flecha
-            if (window.scrollY > 100) {
-                arrow.style.opacity = '0';
-            } else {
-                arrow.style.opacity = '1';
-            }
-        });
-    </script>
+    }
+</script>
 </body>
 </html>
