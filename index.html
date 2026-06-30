@@ -376,8 +376,47 @@
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: 10;
-            cursor: default;
+            cursor: pointer;
         }
+
+        /* ── Modal certificado ── */
+        #cert-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,.82);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        #cert-modal.open { display: flex; }
+        #cert-modal-img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+        #cert-modal-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            background: rgba(255,255,255,.2);
+            border: none;
+            border-radius: 50%;
+            width: 42px; height: 42px;
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+        #cert-modal-close:hover { background: rgba(255,255,255,.35); }
         .cert-badge img {
             max-height: 100%; max-width: 100%; object-fit: contain;
             pointer-events: none;
@@ -611,25 +650,25 @@
 
         <div class="cert-card">
             <div class="cert-scroll">
-                <div class="cert-badge">
+                <div class="cert-badge" data-src="45001 2018.png">
                     <img src="45001 2018.png" alt="ISO 45001">
                 </div>
-                <div class="cert-badge">
+                <div class="cert-badge" data-src="14001 2015.png">
                     <img src="14001 2015.png" alt="ISO 14001">
                 </div>
-                <div class="cert-badge">
+                <div class="cert-badge" data-src="9001 2015.png">
                     <img src="9001 2015.png" alt="ISO 9001">
                 </div>
-                <div class="cert-badge">
+                <div class="cert-badge" data-src="NORMEX F-610.png">
                     <img src="NORMEX F-610.png" alt="NORMEX F-610">
                 </div>
-                <div class="cert-badge">
+                <div class="cert-badge" data-src="Logo_Cofepris_1200.png">
                     <img src="Logo_Cofepris_1200.png" alt="COFEPRIS">
                 </div>
-                <div class="cert-badge">
+                <div class="cert-badge" data-src="NPMA-logo-1024x315.webp">
                     <img src="NPMA-logo-1024x315.webp" alt="NPMA">
                 </div>
-                <div class="cert-badge">
+                <div class="cert-badge" data-src="ANPUAC LOGO.png">
                     <img src="ANPUAC LOGO.png" alt="ANPUAC">
                 </div>
             </div>
@@ -657,6 +696,12 @@
     <p class="v-footer">© 2026 ProControl México · Todos los derechos reservados</p>
 
 </div><!-- /vcard -->
+
+<!-- Modal certificado -->
+<div id="cert-modal">
+    <button id="cert-modal-close" aria-label="Cerrar">✕</button>
+    <img id="cert-modal-img" src="" alt="Certificado">
+</div>
 
 <script>
     lucide.createIcons();
@@ -752,6 +797,29 @@
             return false;
         }
     });
+
+    // Modal de certificados
+    const certModal    = document.getElementById('cert-modal');
+    const certModalImg = document.getElementById('cert-modal-img');
+    const certModalClose = document.getElementById('cert-modal-close');
+
+    function openCertModal(src) {
+        certModalImg.src = src;
+        certModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeCertModal() {
+        certModal.classList.remove('open');
+        certModalImg.src = '';
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.cert-badge[data-src]').forEach(badge => {
+        badge.addEventListener('click', () => openCertModal(badge.dataset.src));
+    });
+    certModalClose.addEventListener('click', closeCertModal);
+    certModal.addEventListener('click', e => { if (e.target === certModal) closeCertModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCertModal(); });
 
     window.addEventListener('beforeprint', () => {
         document.documentElement.style.setProperty('display', 'none', 'important');
