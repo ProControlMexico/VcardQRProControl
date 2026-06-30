@@ -366,12 +366,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
             flex-shrink: 0;
             transition: transform .2s, box-shadow .2s;
+            position: relative;
         }
         .cert-badge:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(15,23,42,.1); }
-        .cert-badge img   { max-height: 100%; max-width: 100%; object-fit: contain; }
+        .cert-badge::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 10;
+            cursor: default;
+        }
+        .cert-badge img {
+            max-height: 100%; max-width: 100%; object-fit: contain;
+            pointer-events: none;
+            user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+        }
+
+        img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
+
+        @media print {
+            body { display: none !important; }
+        }
         .cert-footnote {
             font-size: 10px;
             color: var(--muted);
@@ -591,27 +608,27 @@
 
         <div class="cert-card">
             <div class="cert-scroll">
-                <a href="PROCONTROL ISO 45001 (2) (1).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                <div class="cert-badge">
                     <img src="45001 2018.png" alt="ISO 45001">
-                </a>
-                <a href="PROCONTROL ISO 14001 (2) (1).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                </div>
+                <div class="cert-badge">
                     <img src="14001 2015.png" alt="ISO 14001">
-                </a>
-                <a href="PROCONTROL ISO 9001 (2).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                </div>
+                <div class="cert-badge">
                     <img src="9001 2015.png" alt="ISO 9001">
-                </a>
-                <a href="NORMEX.pdf" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                </div>
+                <div class="cert-badge">
                     <img src="NORMEX F-610.png" alt="NORMEX F-610">
-                </a>
-                <a href="Logo_Cofepris_1200.png" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                </div>
+                <div class="cert-badge">
                     <img src="Logo_Cofepris_1200.png" alt="COFEPRIS">
-                </a>
-                <a href="NPMA-logo-1024x315.webp" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                </div>
+                <div class="cert-badge">
                     <img src="NPMA-logo-1024x315.webp" alt="NPMA">
-                </a>
-                <a href="ANPUAC LOGO.png" target="_blank" rel="noopener noreferrer" class="cert-badge">
+                </div>
+                <div class="cert-badge">
                     <img src="ANPUAC LOGO.png" alt="ANPUAC">
-                </a>
+                </div>
             </div>
         </div>
 
@@ -711,20 +728,35 @@
         })
     );
 
-    function shareCard() {
-        const data = {
-            title: 'ProControl México',
-            text: 'Profesionales en control integral de plagas. Certificados ISO 9001 · 14001 · 45001 · COFEPRIS.',
-            url: window.location.href
-        };
-        if (navigator.share) {
-            navigator.share(data).catch(() => {});
-        } else {
-            navigator.clipboard.writeText(data.url).then(() => {
-                alert('Enlace copiado al portapapeles');
-            });
+    // Protección: bloquear clic derecho
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Protección: bloquear atajos de teclado de impresión/descarga/captura
+    document.addEventListener('keydown', e => {
+        const ctrl = e.ctrlKey || e.metaKey;
+        // Ctrl+P (imprimir), Ctrl+S (guardar), Ctrl+U (ver fuente), Ctrl+Shift+I/J (devtools)
+        if (ctrl && ['p', 's', 'u'].includes(e.key.toLowerCase())) {
+            e.preventDefault();
+            return false;
         }
-    }
+        if (ctrl && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase())) {
+            e.preventDefault();
+            return false;
+        }
+        // F12 (devtools), PrintScreen
+        if (['F12', 'PrintScreen'].includes(e.key)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // beforeprint: el CSS @media print ya oculta el body; aquí solo reforzamos
+    window.addEventListener('beforeprint', () => {
+        document.body.style.display = 'none';
+    });
+    window.addEventListener('afterprint', () => {
+        document.body.style.display = '';
+    });
 </script>
 </body>
 </html>
