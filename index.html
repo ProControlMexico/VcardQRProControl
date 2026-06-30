@@ -387,7 +387,10 @@
         img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 
         @media print {
-            body { display: none !important; }
+            html, body, body * {
+                display: none !important;
+                visibility: hidden !important;
+            }
         }
         .cert-footnote {
             font-size: 10px;
@@ -750,12 +753,13 @@
         }
     });
 
-    // beforeprint: el CSS @media print ya oculta el body; aquí solo reforzamos
     window.addEventListener('beforeprint', () => {
-        document.body.style.display = 'none';
+        document.documentElement.style.setProperty('display', 'none', 'important');
+        document.documentElement.style.setProperty('visibility', 'hidden', 'important');
     });
     window.addEventListener('afterprint', () => {
-        document.body.style.display = '';
+        document.documentElement.style.removeProperty('display');
+        document.documentElement.style.removeProperty('visibility');
     });
 </script>
 </body>
